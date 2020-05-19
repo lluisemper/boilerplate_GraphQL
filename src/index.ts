@@ -3,10 +3,13 @@ import express from 'express';
 import { ApolloServer} from 'apollo-server-express';
 import {buildSchema} from 'type-graphql';
 import { UserResolver } from "./userResolver";
+import { createConnection } from "typeorm";
 
 
 (async() => {
     const app = express();
+
+    await createConnection();
 
     const apolloServer = new ApolloServer({
         schema: await buildSchema({
